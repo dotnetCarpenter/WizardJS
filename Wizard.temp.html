@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Paging class</title>
+	<script src="util.js"></script>
+	<script>
+		var Wizard = function(){
+			var _handlers = [];
+		
+			this.addHandler = function(type, handler, options){
+				_handlers[type] = handler;
+				
+				console.log(util.getEnumName(this.Type, type));
+			}
+		}
+		Wizard.prototype.next = function(){}
+		Wizard.prototype.prev = function(){}
+		Wizard.prototype.addBeforeEffect = function(page, handler){
+			this.addHandler(this.Type.effectBefore, handler, { page: page });
+		}
+		Wizard.prototype.addAfterEffect = function(page, handler){
+			this.addHandler(this.Type.effectAfter, handler, { page: page });
+		}
+		Wizard.prototype.Type = {
+			effectBefore: 1,
+			effectAfter: 2
+		}
+	</script>
+</head>
+<body>
+	<div id="p-one"><h1>1</h1></div>
+	<div id="p-top"><h1>arghh hail</h1></div>
+	<div id="p-down"><h1>down yeirgh ma boz</h1></div>
+	<div id="p-two"><h1>2</h1></div>
+	<div id="p-leg"><h1>3</h1></div>
+	<form>
+		<fieldset>
+			<legend>Invoke</legend>
+			<input type="button" value="Create wizard" id="wizCrea">
+		</fieldset>
+	</form>
+	<script>
+		document.getElementById("wizCrea").onclick = (function(){
+			var wizard = new Wizard();
+			wizard.addHandler(wizard.Type.effectBefore, function(){ ; });
+		});
+	</script>
+</body>
+</html>
