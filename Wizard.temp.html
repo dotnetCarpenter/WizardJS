@@ -4,46 +4,14 @@
 	<meta charset="utf-8"/>
 	<title>Paging class</title>
 	<script src="util.js"></script>
-	<script>
-		var Wizard = function(config){
-console.dir(config.pages);
-console.log(typeof config.pages);
-			var config = config || {};
-			var _handlers = [], _pages = config.pages;
-
-			// init
-			function init(){
-				for(var i = 1, l = _pages.length; i < l; i++){
-					_pages[i].style.display = 'none';
-				}
-			}
-		
-			this.addHandler = function(type, handler, options){
-				_handlers[type] = handler;
-				
-				console.log(util.getEnumName(this.Type, type));
-			}
-			init();
-		}
-		Wizard.prototype.next = function(){}
-		Wizard.prototype.prev = function(){}
-		Wizard.prototype.addBeforeEffect = function(page, handler){
-			this.addHandler(this.Type.effectBefore, handler, { page: page });
-		}
-		Wizard.prototype.addAfterEffect = function(page, handler){
-			this.addHandler(this.Type.effectAfter, handler, { page: page });
-		}
-		Wizard.prototype.Type = {
-			effectBefore: 1,
-			effectAfter: 2
-		}
-	</script>
+	<script src="wizard.source.js"></script>
 </head>
 <body>
 	<form>
 		<fieldset>
 			<legend>Invoke</legend>
-			<input type="button" value="Create wizard" id="wizCrea">
+			<input type="button" value="Create wizard" id="create">
+			<input type="button" value="Create wizard with config.pages" id="create-conf">
 		</fieldset>
 	</form>
 	<div class="wiz" id="p-one"><h1>1</h1></div>
@@ -52,7 +20,11 @@ console.log(typeof config.pages);
 	<div class="wiz" id="p-two"><h1>2</h1></div>
 	<div class="wiz" id="p-leg"><h1>3</h1></div>
 	<script>
-		document.getElementById("wizCrea").onclick = (function(){
+		document.getElementById("create").onclick = (function(){
+			var wizard = new Wizard();
+			wizard.addBeforeEffect(1, function(){ console.dir(this); });
+		});
+		document.getElementById("create-conf").onclick = (function(){
 			var wizard = new Wizard({ pages: document.getElementsByClassName("wiz") });
 			wizard.addAfterEffect(1, function(){ console.dir(this); });
 		});
