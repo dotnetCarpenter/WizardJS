@@ -43,7 +43,7 @@
 	<script>
 		document.getElementById("wizCrea").onclick = (function(){
 			var wizard = new Wizard();
-			wizard.addHandler(wizard.Type.effectBefore, function(){ ; });
+			wizard.addAfterEffect(1, function(){ console.dir(this); });
 		});
 	</script>
 </body>
