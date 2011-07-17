@@ -3,6 +3,11 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Paging class</title>
+	<style>
+		input:nth-child(4), input:nth-child(5){
+			display:none;
+		}
+	</style>
 	<script src="util.js"></script>
 	<script src="wizard.source.js"></script>
 </head>
@@ -12,6 +17,8 @@
 			<legend>Invoke</legend>
 			<input type="button" value="Create wizard" id="create">
 			<input type="button" value="Create wizard with config.pages" id="create-conf">
+			<input type="button" value="next" id="next">
+			<input type="button" value="previous" id="prev">
 		</fieldset>
 	</form>
 	<div class="wiz" id="p-one"><h1>1</h1></div>
@@ -20,13 +27,15 @@
 	<div class="wiz" id="p-two"><h1>2</h1></div>
 	<div class="wiz" id="p-leg"><h1>3</h1></div>
 	<script>
-		document.getElementById("create").onclick = (function(){
+		var $ = function(id){ return document.getElementById(id); }
+		$("create").onclick = (function(){
 			var wizard = new Wizard();
 			wizard.addBeforeEffect(1, function(){ console.dir(this); });
 		});
-		document.getElementById("create-conf").onclick = (function(){
+		$("create-conf").onclick = (function(){
 			var wizard = new Wizard({ pages: document.getElementsByClassName("wiz") });
 			wizard.addAfterEffect(1, function(){ console.dir(this); });
+			$("next").style.display = 'inline';
 		});
 	</script>
 </body>
