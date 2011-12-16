@@ -25,3 +25,7 @@ util = {
 		return false
 	}
 }
+// Implement forEach on arrays if it doesn't exist
+if(![].forEach){
+    throw new Error("forEach needs to be implemented");
+}
