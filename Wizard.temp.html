@@ -35,15 +35,21 @@
 	<div class="wiz" id="p-two"><h1>2</h1></div>
 	<div class="wiz" id="p-leg"><h1>3</h1></div>
 	<script>
-		var $ = function(id){ return document.getElementById(id); }
-		$("create").onclick = (function(){
+		var $ = $ || function(id){ return document.getElementById(id.match(/#(.*)/)[1]); }
+		$("#create").onclick = (function(){
+		    var pages = document.getElementsByClassName("wiz");
 			var wizard = new Wizard();
+			
 			wizard.addBeforeEffect(1, function(){ console.dir(this); });
 		});
-		$("create-conf").onclick = (function(){
-			var wizard = new Wizard({ pages: document.getElementsByClassName("wiz") });
+		$("#create-conf").onclick = (function(){
+			var wizard = new Wizard({
+			    pages: document.getElementsByClassName("wiz")
+			    , handlers: []
+			});
+			
 			wizard.addAfterEffect(1, function(){ console.dir(this); });
-			$("next").style.display = 'inline';
+			$("#next").style.display = 'inline';
 		});
 	</script>
 </body>
