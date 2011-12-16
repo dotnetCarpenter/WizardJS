@@ -50,6 +50,7 @@
 			
 			wizard.addAfterEffect(1, function(){ console.dir(this); });
 			$("#next").style.display = 'inline';
+			$("#next").onclick = function(){ wizard.next(); }
 		});
 	</script>
 </body>
