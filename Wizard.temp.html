@@ -48,7 +48,7 @@
 			    , handlers: []
 			});
 			
-			wizard.addAfterEffect(1, function(){ console.dir(this); });
+			wizard.addAfterEffect(1, function(){ console.info('after effect'), console.dir(arguments); });
 			$("#next").style.display = 'inline';
 			$("#next").onclick = function(){ wizard.next(); }
 		});
